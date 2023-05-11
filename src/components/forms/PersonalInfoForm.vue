@@ -67,38 +67,46 @@ import IconNext from '@/components/icons/IconNext.vue'
 import { Form, Field, ErrorMessage } from 'vee-validate'
 import { useRouter } from 'vue-router'
 import { onMounted, onUnmounted, ref } from 'vue'
+import { useStore } from 'vuex'
+// import { computed } from 'vue'
 
 const router = useRouter()
+const store = useStore()
+
 let name = ref('')
 let lastName = ref('')
 let email = ref('')
 
 onMounted(() => {
   window.onbeforeunload = function () {
-    storeFormDataInLocalStorage()
-  }
-  if (localStorage.getItem('personal-info') !== null) {
-    name.value = JSON.parse(localStorage.getItem('personal-info')).name
-    lastName.value = JSON.parse(localStorage.getItem('personal-info')).lastName
-    email.value = JSON.parse(localStorage.getItem('personal-info')).email
-  }
-})
-
-onUnmounted(() => {
-  storeFormDataInLocalStorage()
-})
-
-function submitForm() {
-  router.push({ name: 'covid-info' })
-}
-function storeFormDataInLocalStorage() {
-  localStorage.setItem(
-    'personal-info',
-    JSON.stringify({
+    store.commit('personalInfoStore/storePersonalInfoInLocalStorage', {
       name: name.value,
       lastName: lastName.value,
       email: email.value
     })
-  )
+  }
+  if (localStorage.getItem('personal-info') !== null) {
+    store.commit('personalInfoStore/getPersonalInfoFormValues')
+    name.value = store.state.personalInfoStore.name
+    lastName.value = store.state.personalInfoStore.lastName
+    email.value = store.state.personalInfoStore.email
+  }
+})
+
+onUnmounted(() => {
+  store.commit('personalInfoStore/storePersonalInfoInLocalStorage', {
+    name: name.value,
+    lastName: lastName.value,
+    email: email.value
+  })
+})
+
+function submitForm() {
+  router.push({ name: 'covid-info' })
+  store.commit('personalInfoStore/setPersonalInfoFormValues', {
+    name: name.value,
+    lastName: lastName.value,
+    email: email.value
+  })
 }
 </script>

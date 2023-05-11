@@ -3,10 +3,7 @@
     <div class="flex mt-6">
       <div class="ml-10 flex flex-col lg:ml-48 lg:w-1/3">
         <div class="mt-6 font-arial font-semibold">
-          <label
-            for="name"
-            class="block text-xl font-bold mb-3 leading-7"
-            :class="{ 'text-normal': covidQuestion }"
+          <label for="name" class="block text-xl font-bold mb-3 leading-7"
             >გაქვთ გადატანილი Covid-19*</label
           >
           <div class="flex flex-col ml-6">
@@ -147,8 +144,10 @@ import IconPrevious from '@/components/icons/IconPrevious.vue'
 import { Form, Field } from 'vee-validate'
 import { ref, onUnmounted, onMounted } from 'vue'
 import { RouterLink, useRouter } from 'vue-router'
+import { useStore } from 'vuex'
 
 const router = useRouter()
+const store = useStore()
 let showAntiBodiesQuestion = ref(false)
 let showTestDate = ref(false)
 let showCovidDate = ref(false)
@@ -162,19 +161,26 @@ let hadCovidAtDate = ref('')
 
 onMounted(() => {
   window.onbeforeunload = function () {
-    storeFormDataInLocalStorage()
+    store.commit('covidInfoStore/storePersonalInfoInLocalStorage', {
+      covidQuestion: covidQuestion.value,
+      antibodiesQuestion: antibodiesQuestion.value,
+      antibodiesTestDate: antibodiesTestDate.value,
+      antibodiesAmount: antibodiesAmount.value,
+      hadCovidAtDate: hadCovidAtDate.value
+    })
   }
   if (localStorage.getItem('covid-info') !== null) {
-    covidQuestion.value = JSON.parse(localStorage.getItem('covid-info')).covidQuestion
+    store.commit('covidInfoStore/getCovidInfoFormValues')
+    covidQuestion.value = store.state.covidInfoStore.hadCovid
     if (covidQuestion.value == 'covid-yes') {
       showAntiBodiesQuestion.value = true
-      antibodiesQuestion.value = JSON.parse(localStorage.getItem('covid-info')).antibodiesQuestion
+      antibodiesQuestion.value = store.state.covidInfoStore.hadAntibodiesTest
       if (antibodiesQuestion.value == 'antibodies-yes') {
         showTestDate.value = true
-        antibodiesTestDate.value = JSON.parse(localStorage.getItem('covid-info')).antibodiesTestDate
-        antibodiesAmount.value = JSON.parse(localStorage.getItem('covid-info')).antibodiesAmount
+        antibodiesTestDate.value = store.state.covidInfoStore.antibodiesTestDate
+        antibodiesAmount.value = store.state.covidInfoStore.antibodiesAmount
       } else {
-        hadCovidAtDate.value = JSON.parse(localStorage.getItem('covid-info')).hadCovidAtDate
+        hadCovidAtDate.value = store.state.covidInfoStore.hadCovidDate
         showCovidDate.value = true
       }
     }
@@ -182,23 +188,24 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
-  storeFormDataInLocalStorage()
+  store.commit('covidInfoStore/storePersonalInfoInLocalStorage', {
+    covidQuestion: covidQuestion.value,
+    antibodiesQuestion: antibodiesQuestion.value,
+    antibodiesTestDate: antibodiesTestDate.value,
+    antibodiesAmount: antibodiesAmount.value,
+    hadCovidAtDate: hadCovidAtDate.value
+  })
 })
 
 function handleHadCovidForm() {
   router.push({ name: 'vaccination-info' })
-}
 
-function storeFormDataInLocalStorage() {
-  localStorage.setItem(
-    'covid-info',
-    JSON.stringify({
-      covidQuestion: covidQuestion.value,
-      antibodiesQuestion: antibodiesQuestion.value,
-      antibodiesTestDate: antibodiesTestDate.value,
-      antibodiesAmount: antibodiesAmount.value,
-      hadCovidAtDate: hadCovidAtDate.value
-    })
-  )
+  store.commit('covidInfoStore/setCovidFormValues', {
+    hadCovid: covidQuestion.value,
+    hadAntibodiesTest: antibodiesQuestion.value,
+    antibodiesTestDate: antibodiesTestDate.value,
+    antibodiesAmount: antibodiesAmount.value,
+    hadCovidDate: hadCovidAtDate.value
+  })
 }
 </script>

@@ -7,8 +7,13 @@ import './assets/tailwind.css'
 import "./plugins/vee-validate/rules";
 import "./plugins/vee-validate/messages";
 
+import store from './store/store.js';
+
+
 const app = createApp(App)
 
 app.use(router)
+app.use(store)
+
 
 app.mount('#app')
