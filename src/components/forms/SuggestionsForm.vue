@@ -88,6 +88,13 @@
           </div>
         </div>
       </div>
+      <div class="flex justify-end mr-28 mt-16">
+        <button
+          class="text-white font-bold py-4 px-6 rounded-full bg-[#208298] capitalize text-lg text-white rounded-md"
+        >
+          დასრულება
+        </button>
+      </div>
     </div>
     <img src="/images/office-work.png" alt="friends" class="hidden lg:block ml-14" />
   </div>
