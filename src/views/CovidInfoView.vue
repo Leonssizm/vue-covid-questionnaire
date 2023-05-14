@@ -1,7 +1,7 @@
 <template>
   <div class="h-screen bg-[#EAEAEA]">
     <Header :pageNum="2" />
-    <div class="flex flex-col">
+    <div>
       <CovidInfoForm />
     </div>
   </div>

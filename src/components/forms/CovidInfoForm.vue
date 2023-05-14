@@ -1,5 +1,5 @@
 <template>
-  <Form @submit="handleHadCovidForm">
+  <Form @submit="handleHadCovidForm" class="overflow-hidden">
     <div class="flex mt-6">
       <div class="ml-10 flex flex-col lg:ml-48 lg:w-1/3">
         <div class="mt-6 font-arial font-semibold">
@@ -125,7 +125,24 @@
           </div>
         </div>
       </div>
-      <img src="/images/covid-info.png" alt="friends" class="hidden lg:block ml-14" />
+      <div class="relative">
+        <img src="/images/covid-info.png" alt="infected" class="hidden lg:block ml-14" />
+
+        <Transition
+          name="slide-down"
+          enter-active-class="slide-down-enter-active"
+          enter-class="slide-down-enter"
+          appear
+        >
+          <div class="absolute top-0 w-full h-full">
+            <img
+              src="/images/highlights/covid-highlight.png"
+              alt="overlay"
+              class="opacity-80 mt-52 ml-20"
+            />
+          </div>
+        </Transition>
+      </div>
     </div>
     <div class="mt-24 mb-24 flex justify-center lg:mt-0 lg:mb-0">
       <RouterLink to="/personal-info" class="mr-14">
@@ -199,7 +216,6 @@ onUnmounted(() => {
 
 function handleHadCovidForm() {
   router.push({ name: 'vaccination-info' })
-
   store.commit('covidInfoStore/setCovidFormValues', {
     hadCovid: covidQuestion.value,
     hadAntibodiesTest: antibodiesQuestion.value,
@@ -209,3 +225,18 @@ function handleHadCovidForm() {
   })
 }
 </script>
+<style scoped>
+.slide-down-enter-active {
+  transition: all 0.6s;
+}
+
+.slide-down-enter-from {
+  opacity: 0.1;
+  transform: translateX(20%) translateY(-10%);
+}
+
+.slide-down-enter-to {
+  opacity: 0.7;
+  transform: translateX(0);
+}
+</style>

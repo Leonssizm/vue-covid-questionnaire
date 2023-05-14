@@ -48,11 +48,24 @@
           </p>
         </footer>
       </div>
-      <img
-        src="/images/personal-info.png"
-        alt="friends"
-        class="hidden lg:ml-14 lg:mt-14 lg:block"
-      />
+      <div class="relative">
+        <img
+          src="/images/personal-info.png"
+          alt="friends"
+          class="hidden lg:ml-14 lg:mt-14 lg:block"
+        />
+
+        <Transition
+          name="slide-down"
+          enter-active-class="slide-down-enter-active"
+          enter-class="slide-down-enter"
+          appear
+        >
+          <div class="absolute top-0 w-full h-full mt-44 ml-44">
+            <img src="/images/highlights/friends-highlight.png" alt="overlay" class="opacity-70" />
+          </div>
+        </Transition>
+      </div>
     </div>
     <div class="mb-16 flex justify-center mt-20 lg:mb-0">
       <button>
@@ -110,3 +123,17 @@ function submitForm() {
   })
 }
 </script>
+
+<style scoped>
+.slide-down-enter-active {
+  transition: all 0.6s;
+}
+
+.slide-down-enter-from {
+  opacity: 0;
+  transform: translateX(-70%) translateY(60%);
+}
+.slide-down-enter-to {
+  opacity: 0.7;
+}
+</style>
