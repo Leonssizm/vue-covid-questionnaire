@@ -9,6 +9,6 @@
 
 <script setup>
 import Header from '@/components/Header.vue'
-import PersonalInfoForm from '@/components/forms/PersonalInfoForm.vue'
+import PersonalInfoForm from '@/components/forms/personalInfo/PersonalInfoForm.vue'
 document.title = 'Personal Info'
 </script>

@@ -150,25 +150,7 @@
           </div>
         </div>
       </div>
-
-      <div class="relative">
-        <img src="/images/vaccination-doctor.png" alt="friends" class="hidden lg:block ml-14" />
-
-        <Transition
-          name="slide-down"
-          enter-active-class="slide-down-enter-active"
-          enter-class="slide-down-enter"
-          appear
-        >
-          <div class="absolute top-0 w-full h-full">
-            <img
-              src="/images/highlights/vaccine-highlight.png"
-              alt="overlay"
-              class="opacity-80 ml-6"
-            />
-          </div>
-        </Transition>
-      </div>
+      <VaccinationInfoFormImage />
     </div>
     <div class="mt-24 mb-24 flex justify-center lg:mt-0 lg:mb-0">
       <RouterLink to="/covid-info" class="mr-14">
@@ -184,6 +166,7 @@
 <script setup>
 import IconNext from '@/components/icons/IconNext.vue'
 import IconPrevious from '@/components/icons/IconPrevious.vue'
+import VaccinationInfoFormImage from '@/components/forms/vaccinationInfo/VaccinationInfoFormImage.vue'
 import { Form, Field } from 'vee-validate'
 import { ref, onMounted, onUnmounted } from 'vue'
 import { useStore } from 'vuex'
@@ -246,19 +229,3 @@ function handleVaccinationInfoForm() {
   })
 }
 </script>
-
-<style scoped>
-.slide-down-enter-active {
-  transition: all 0.6s;
-}
-
-.slide-down-enter-from {
-  opacity: 0.1;
-  transform: translateX(-10%) translateY(30%);
-}
-
-.slide-down-enter-to {
-  opacity: 0.7;
-  transform: translateX(0);
-}
-</style>

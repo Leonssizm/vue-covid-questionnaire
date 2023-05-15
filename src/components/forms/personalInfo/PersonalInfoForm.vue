@@ -39,33 +39,9 @@
           />
           <ErrorMessage name="email" class="lg:ml-5 text-red-500 mt-1" />
         </div>
-
-        <footer class="mt-28 font-arial">
-          <div class="border-black border-b-2 w-60 border-slate-400"></div>
-          <p class="mt-4 text-[#626262] text-sm">
-            *-ით მონიშნული ველების შევსება <br />
-            სავალდებულოა
-          </p>
-        </footer>
+        <PersonalInfoFormFooter />
       </div>
-      <div class="relative">
-        <img
-          src="/images/personal-info.png"
-          alt="friends"
-          class="hidden lg:ml-14 lg:mt-14 lg:block"
-        />
-
-        <Transition
-          name="slide-down"
-          enter-active-class="slide-down-enter-active"
-          enter-class="slide-down-enter"
-          appear
-        >
-          <div class="absolute top-0 w-full h-full mt-44 ml-44">
-            <img src="/images/highlights/friends-highlight.png" alt="overlay" class="opacity-70" />
-          </div>
-        </Transition>
-      </div>
+      <PersonalInfoFormImage />
     </div>
     <div class="mb-16 flex justify-center mt-20 lg:mb-0">
       <button>
@@ -77,6 +53,8 @@
 
 <script setup>
 import IconNext from '@/components/icons/IconNext.vue'
+import PersonalInfoFormFooter from '@/components/forms/personalInfo/PersonalInfoFooter.vue'
+import PersonalInfoFormImage from '@/components/forms/personalInfo/PersonalInfoFormImage.vue'
 import { Form, Field, ErrorMessage } from 'vee-validate'
 import { useRouter } from 'vue-router'
 import { onMounted, onUnmounted, ref } from 'vue'
@@ -123,17 +101,3 @@ function submitForm() {
   })
 }
 </script>
-
-<style scoped>
-.slide-down-enter-active {
-  transition: all 0.6s;
-}
-
-.slide-down-enter-from {
-  opacity: 0;
-  transform: translateX(-70%) translateY(60%);
-}
-.slide-down-enter-to {
-  opacity: 0.7;
-}
-</style>
