@@ -3,109 +3,8 @@
     <div class="ml-10 flex flex-col lg:ml-48 lg:w-1/3 overflow-auto max-h-[700px]">
       <SuggestionsFormInfo />
       <Form @submit="handleSuggestionsForm">
-        <SuggestionsFormMettings>
-          <div class="flex">
-            <Field
-              type="radio"
-              name="online_meetings"
-              class="mr-2 w-5"
-              value="twice_a_week"
-              rules="required"
-              v-model="onlineMeetingsQuestion"
-            />
-            <SuggestionsFormInputLabel label="კვირაში ორჯერ" />
-          </div>
-          <div class="flex mt-2">
-            <Field
-              type="radio"
-              name="online_meetings"
-              class="mr-2 w-5"
-              value="once_a_week"
-              rules="required"
-              v-model="onlineMeetingsQuestion"
-            />
-            <SuggestionsFormInputLabel label="კვირაში ერთხელ" />
-          </div>
-          <div class="flex mt-2">
-            <Field
-              type="radio"
-              name="online_meetings"
-              class="mr-2 w-5"
-              value="once_in_a_two_weeks"
-              rules="required"
-              v-model="onlineMeetingsQuestion"
-            />
-            <SuggestionsFormInputLabel label="ორ კვირაში ერთხელ" />
-          </div>
-          <div class="flex mt-2">
-            <Field
-              type="radio"
-              name="online_meetings"
-              class="mr-2 w-5"
-              value="once_in_a_month"
-              rules="required"
-              v-model="onlineMeetingsQuestion"
-            />
-            <SuggestionsFormInputLabel label="თვეში ერთხელ" />
-          </div>
-        </SuggestionsFormMettings>
-        <SuggestionsFormOffice>
-          <div class="flex">
-            <Field
-              type="radio"
-              name="office_workdays"
-              class="mr-2 w-5"
-              value="1"
-              rules="required"
-              v-model="officeWorkDaysQuestion"
-            />
-            <SuggestionsFormInputLabel label="1" />
-          </div>
-          <div class="flex mt-2">
-            <Field
-              type="radio"
-              name="office_workdays"
-              class="mr-2 w-5"
-              value="2"
-              rules="required"
-              v-model="officeWorkDaysQuestion"
-            />
-            <SuggestionsFormInputLabel label="2" />
-          </div>
-          <div class="flex mt-2">
-            <Field
-              type="radio"
-              name="office_workdays"
-              class="mr-2 w-5"
-              value="3"
-              rules="required"
-              v-model="officeWorkDaysQuestion"
-            />
-            <SuggestionsFormInputLabel label="3" />
-          </div>
-          <div class="flex mt-2">
-            <Field
-              type="radio"
-              name="office_workdays"
-              class="mr-2 w-5"
-              value="4"
-              rules="required"
-              v-model="officeWorkDaysQuestion"
-            />
-            <SuggestionsFormInputLabel label="4" />
-          </div>
-          <div class="flex mt-2">
-            <Field
-              type="radio"
-              name="office_workdays"
-              class="mr-2 w-5"
-              value="5"
-              rules="required"
-              v-model="officeWorkDaysQuestion"
-            />
-            <SuggestionsFormInputLabel label="5" />
-          </div>
-        </SuggestionsFormOffice>
+        <SuggestionsFormMettings v-model="onlineMeetingsQuestion"> </SuggestionsFormMettings>
+        <SuggestionsFormOffice v-model="officeWorkDaysQuestion"> </SuggestionsFormOffice>
         <SuggestionsFormInput>
           <Field
             v-model="physicalGathering"
@@ -144,20 +43,22 @@ import IconPrevious from '@/components/icons/IconPrevious.vue'
 import SuggestionsFormInfo from '@/components/forms/suggestions/SuggestionsFormInfo.vue'
 import SuggestionsFormImage from '@/components/forms/suggestions/SuggestionsFormImage.vue'
 import SuggestionsFormMettings from '@/components/forms/suggestions/SuggestionsFormMettings.vue'
-import SuggestionsFormInputLabel from '@/components/forms/suggestions/SuggestionsFormInputLabel.vue'
 import SuggestionsFormOffice from '@/components/forms/suggestions/SuggestionsFormOffice.vue'
 import SuggestionsFormInput from '@/components/forms/suggestions/SuggestionsFormInput.vue'
 import { Form, Field } from 'vee-validate'
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, provide } from 'vue'
 import { useStore } from 'vuex'
-document.title = 'suggestions'
 // import { RouterLink, useRouter } from 'vue-router'
+document.title = 'suggestions'
 
 const store = useStore()
 let onlineMeetingsQuestion = ref('')
 let officeWorkDaysQuestion = ref('')
 let physicalGathering = ref('')
 let enviroment = ref('')
+
+provide('onlineMeetingsQuestion', onlineMeetingsQuestion)
+provide('officeWorkDaysQuestion', officeWorkDaysQuestion)
 
 onMounted(() => {
   window.onbeforeunload = function () {
