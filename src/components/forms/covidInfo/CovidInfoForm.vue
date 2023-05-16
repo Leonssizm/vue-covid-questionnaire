@@ -1,5 +1,5 @@
 <template>
-  <Form @submit="handleHadCovidForm">
+  <Form @submit="handleHadCovidForm" class="overflow-hidden">
     <div class="flex mt-6">
       <div class="ml-10 flex flex-col lg:ml-48 lg:w-1/3">
         <div class="mt-6 font-arial font-semibold">
@@ -125,7 +125,7 @@
           </div>
         </div>
       </div>
-      <img src="/images/covid-info.png" alt="friends" class="hidden lg:block ml-14" />
+      <CovidInfoFormImage />
     </div>
     <div class="mt-24 mb-24 flex justify-center lg:mt-0 lg:mb-0">
       <RouterLink to="/personal-info" class="mr-14">
@@ -141,6 +141,7 @@
 <script setup>
 import IconNext from '@/components/icons/IconNext.vue'
 import IconPrevious from '@/components/icons/IconPrevious.vue'
+import CovidInfoFormImage from '@/components/forms/covidInfo/CovidInfoFormImage.vue'
 import { Form, Field } from 'vee-validate'
 import { ref, onUnmounted, onMounted } from 'vue'
 import { RouterLink, useRouter } from 'vue-router'
@@ -199,7 +200,6 @@ onUnmounted(() => {
 
 function handleHadCovidForm() {
   router.push({ name: 'vaccination-info' })
-
   store.commit('covidInfoStore/setCovidFormValues', {
     hadCovid: covidQuestion.value,
     hadAntibodiesTest: antibodiesQuestion.value,

@@ -1,7 +1,7 @@
 <template>
   <div class="h-screen bg-[#EAEAEA]">
     <Header :pageNum="2" />
-    <div class="flex flex-col">
+    <div>
       <CovidInfoForm />
     </div>
   </div>
@@ -9,6 +9,6 @@
 
 <script setup>
 import Header from '@/components/Header.vue'
-import CovidInfoForm from '@/components/forms/CovidInfoForm.vue'
+import CovidInfoForm from '@/components/forms/covidInfo/CovidInfoForm.vue'
 document.title = 'Covid Info'
 </script>

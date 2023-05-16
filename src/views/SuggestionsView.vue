@@ -8,6 +8,6 @@
 </template>
 <script setup>
 import Header from '@/components/Header.vue'
-import SuggestionsForm from '@/components/forms/SuggestionsForm.vue'
+import SuggestionsForm from '@/components/forms/suggestions/SuggestionsForm.vue'
 document.title = 'Personal Info'
 </script>

@@ -9,6 +9,6 @@
 
 <script setup>
 import Header from '@/components/Header.vue'
-import VaccinationInfoForm from '@/components/forms/VaccinationInfoForm.vue'
+import VaccinationInfoForm from '@/components/forms/vaccinationInfo/VaccinationInfoForm.vue'
 document.title = 'Vaccination Info'
 </script>
