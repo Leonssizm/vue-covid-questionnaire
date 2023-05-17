@@ -1,7 +1,7 @@
 <template>
   <div class="mt-11">
     <label for="name" class="block text-xl font-bold mb-3 leading-7">
-      რას ფიქრობ ფიზიკურ შეკრებებზე
+      {{ inputLabel }}
     </label>
     <div class="flex flex-col">
       <div class="flex">
@@ -10,3 +10,6 @@
     </div>
   </div>
 </template>
+<script setup>
+defineProps(['inputLabel'])
+</script>

@@ -23,7 +23,7 @@ export default {
                 state.antibodiesTestDate = ''
                 state.antibodiesAmount = ''
             }
-            if(payload.hadCovid !== 'covid-yes'){
+            if(payload.hadCovid !== 'yes'){
                 state.hadAntibodiesTest = ''
                 state.antibodiesTestDate = ''
                 state.antibodiesAmount = ''
@@ -32,7 +32,7 @@ export default {
 
         },
         storePersonalInfoInLocalStorage(_,payload){
-            if(payload.covidQuestion !== 'covid-yes')
+            if(payload.covidQuestion !== 'yes')
             {
                 localStorage.setItem(
                     'covid-info',

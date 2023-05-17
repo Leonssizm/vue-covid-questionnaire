@@ -5,7 +5,7 @@
       <Form @submit="handleSuggestionsForm">
         <SuggestionsFormMettings v-model="onlineMeetingsQuestion"> </SuggestionsFormMettings>
         <SuggestionsFormOffice v-model="officeWorkDaysQuestion"> </SuggestionsFormOffice>
-        <SuggestionsFormInput>
+        <SuggestionsFormInput inputLabel="რას ფიქრობ ფიზიკურ შეკრებებზე? ">
           <Field
             v-model="physicalGathering"
             name="physical_gathering"
@@ -13,7 +13,9 @@
             class="py-4 px-4 h-40 text-start border border-black lg:w-10/12 bg-[#EAEAEA] placeholder:text-[#232323] font-normal text-xs"
           />
         </SuggestionsFormInput>
-        <SuggestionsFormInput>
+        <SuggestionsFormInput
+          inputLabel="რას ფიქრობ არსებულ გარემოზე: რა მოგწონს, რას დაამატებდი, რას შეცვლიდი? "
+        >
           <Field
             v-model="enviroment"
             name="enviroment"
@@ -48,10 +50,11 @@ import SuggestionsFormInput from '@/components/forms/suggestions/SuggestionsForm
 import { Form, Field } from 'vee-validate'
 import { ref, onMounted, onUnmounted, provide } from 'vue'
 import { useStore } from 'vuex'
-// import { RouterLink, useRouter } from 'vue-router'
+import { RouterLink, useRouter } from 'vue-router'
 document.title = 'suggestions'
 
 const store = useStore()
+const router = useRouter()
 let onlineMeetingsQuestion = ref('')
 let officeWorkDaysQuestion = ref('')
 let physicalGathering = ref('')
@@ -89,13 +92,18 @@ onUnmounted(() => {
 })
 
 function handleSuggestionsForm() {
+  router.push({ name: 'thanks' })
   store.commit('suggestionsStore/setSuggestionsInfoFormValues', {
     onlineMeetings: onlineMeetingsQuestion.value,
     officeWorkdays: officeWorkDaysQuestion.value,
     physicalGatherings: physicalGathering.value,
     enviroment: enviroment.value
   })
-
-  console.log(store.state.suggestionsStore)
+  store.commit('suggestionsStore/storeSuggestionsInfoInLocalStorage', {
+    onlineMeetings: onlineMeetingsQuestion.value,
+    officeWorkdays: officeWorkDaysQuestion.value,
+    physicalGatherings: physicalGathering.value,
+    enviroment: enviroment.value
+  })
 }
 </script>
