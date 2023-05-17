@@ -22,6 +22,7 @@
 <script setup>
 import IconRocketeer from '@/components/icons/IconRocketeer.vue'
 import { RouterLink } from 'vue-router'
+localStorage.clear()
 </script>
 
 <style scoped>

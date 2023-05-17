@@ -105,7 +105,5 @@ function handleVaccinationInfoForm() {
     vaccinationStage: vaccinationStageQuestion.value,
     vaccinationRefusalReasoning: vaccinationRefusalQuestion.value
   })
-
-  console.log(store.state.vaccinationInfoStore)
 }
 </script>

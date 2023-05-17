@@ -4,6 +4,7 @@ import PersonalInfoView from '@/views/PersonalInfoView.vue'
 import CovidInfoView from '@/views/CovidInfoView.vue'
 import VaccinationInfoView from '@/views/VaccinationInfoView.vue'
 import SuggestionsView from '@/views/SuggestionsView.vue'
+import ThankYouView from '@/views/ThankYouView.vue'
 
 
 const router = createRouter({
@@ -33,6 +34,11 @@ const router = createRouter({
       path: '/suggestions',
       name: 'suggestions',
       component: SuggestionsView
+    },
+    {
+      path: '/thanks',
+      name: 'thanks',
+      component: ThankYouView
     },
   ]
 })

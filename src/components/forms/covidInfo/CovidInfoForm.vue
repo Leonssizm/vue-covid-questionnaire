@@ -11,7 +11,7 @@
               <Field
                 type="radio"
                 name="covid"
-                value="covid-yes"
+                value="yes"
                 rules="required"
                 class="mr-2 w-5 accent-black"
                 @click="showAntiBodiesQuestion = true"
@@ -23,7 +23,7 @@
               <Field
                 type="radio"
                 name="covid"
-                value="covid-no"
+                value="no"
                 rules="required"
                 class="mr-2 w-5 accent-black"
                 @click="
@@ -37,7 +37,7 @@
               <Field
                 type="radio"
                 name="covid"
-                value="covid-now"
+                value="have_right_now"
                 rules="required"
                 class="mr-2 w-5 accent-black"
                 @click="
@@ -173,7 +173,7 @@ onMounted(() => {
   if (localStorage.getItem('covid-info') !== null) {
     store.commit('covidInfoStore/getCovidInfoFormValues')
     covidQuestion.value = store.state.covidInfoStore.hadCovid
-    if (covidQuestion.value == 'covid-yes') {
+    if (covidQuestion.value == 'yes') {
       showAntiBodiesQuestion.value = true
       antibodiesQuestion.value = store.state.covidInfoStore.hadAntibodiesTest
       if (antibodiesQuestion.value == 'antibodies-yes') {
