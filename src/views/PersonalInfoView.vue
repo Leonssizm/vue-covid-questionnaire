@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full lg:h-screen bg-[#EAEAEA]">
+  <div class="h-full lg:h-screen bg-[#EAEAEA] overflow-hidden">
     <Header :pageNum="1" />
     <div class="flex flex-col">
       <PersonalInfoForm />
