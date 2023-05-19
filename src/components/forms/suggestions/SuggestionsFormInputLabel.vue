@@ -4,5 +4,10 @@
   </div>
 </template>
 <script setup>
-defineProps(['label'])
+defineProps({
+  label: {
+    type: String,
+    required: true
+  }
+})
 </script>

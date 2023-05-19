@@ -1,5 +1,5 @@
 <template>
-  <Form @submit="submitForm()">
+  <Form @submit="submitForm">
     <div class="flex mt-6">
       <div class="flex flex-col ml-8 font-sans lg:ml-48 lg:w-1/3">
         <div class="mt-6 font-arial flex flex-col">

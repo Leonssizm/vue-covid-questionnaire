@@ -6,10 +6,7 @@
     </label>
     <div class="flex flex-col ml-6 accent-black">
       <div class="flex">
-        <Field
-          type="radio"
-          name="online_meetings"
-          class="mr-2 w-5"
+        <SuggestionsFormMeetingsField
           value="twice_a_week"
           rules="required"
           @input="$emit('update:modelValue', $event.target.value)"
@@ -18,10 +15,7 @@
         <SuggestionsFormInputLabel label="კვირაში ორჯერ" />
       </div>
       <div class="flex mt-2">
-        <Field
-          type="radio"
-          name="online_meetings"
-          class="mr-2 w-5"
+        <SuggestionsFormMeetingsField
           value="once_a_week"
           rules="required"
           @input="$emit('update:modelValue', $event.target.value)"
@@ -30,10 +24,7 @@
         <SuggestionsFormInputLabel label="კვირაში ერთხელ" />
       </div>
       <div class="flex mt-2">
-        <Field
-          type="radio"
-          name="online_meetings"
-          class="mr-2 w-5"
+        <SuggestionsFormMeetingsField
           value="once_in_a_two_weeks"
           rules="required"
           @input="$emit('update:modelValue', $event.target.value)"
@@ -42,10 +33,7 @@
         <SuggestionsFormInputLabel label="ორ კვირაში ერთხელ" />
       </div>
       <div class="flex mt-2">
-        <Field
-          type="radio"
-          name="online_meetings"
-          class="mr-2 w-5"
+        <SuggestionsFormMeetingsField
           value="once_in_a_month"
           rules="required"
           @input="$emit('update:modelValue', $event.target.value)"
@@ -58,12 +46,17 @@
 </template>
 <script setup>
 import SuggestionsFormInputLabel from '@/components/forms/suggestions/SuggestionsFormInputLabel.vue'
+import SuggestionsFormMeetingsField from '@/components/forms/suggestions/SuggestionsFormMeetingsField.vue'
 
-import { Field } from 'vee-validate'
 import { inject } from 'vue'
 
 const initialValue = inject('onlineMeetingsQuestion')
 
-defineProps(['modelValue'])
+defineProps({
+  modelValue: {
+    type: String,
+    required: true
+  }
+})
 defineEmits(['update:modelValue'])
 </script>

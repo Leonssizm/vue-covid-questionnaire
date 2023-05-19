@@ -72,7 +72,7 @@ onMounted(() => {
       enviroment: enviroment.value
     })
   }
-  if (localStorage.getItem('suggestions') != null) {
+  if (localStorage.getItem('suggestions') !== null) {
     store.commit('suggestionsStore/getSuggestionsInfoFormValues')
 
     onlineMeetingsQuestion.value = store.state.suggestionsStore.onlineMeetings

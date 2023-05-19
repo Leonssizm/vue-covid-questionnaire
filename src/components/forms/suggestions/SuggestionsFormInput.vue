@@ -11,5 +11,10 @@
   </div>
 </template>
 <script setup>
-defineProps(['inputLabel'])
+defineProps({
+  inputLabel: {
+    type: String,
+    required: true
+  }
+})
 </script>

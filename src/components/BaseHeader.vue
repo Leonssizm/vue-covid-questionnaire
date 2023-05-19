@@ -13,5 +13,10 @@
 <script setup>
 import RedberryHeader from './icons/RedberryHeader.vue'
 
-defineProps(['pageNum'])
+defineProps({
+  pageNum: {
+    type: Number,
+    required: true
+  }
+})
 </script>
