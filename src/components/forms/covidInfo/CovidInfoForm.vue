@@ -14,7 +14,6 @@
                 value="yes"
                 rules="required"
                 class="mr-2 w-5 accent-black"
-                @click="showAntiBodiesQuestion = true"
                 v-model="covidQuestion"
               />
               <span class="ml-4 leading-7">კი</span>
@@ -26,9 +25,6 @@
                 value="no"
                 rules="required"
                 class="mr-2 w-5 accent-black"
-                @click="
-                  ;(showAntiBodiesQuestion = false), (showTestDate = false), (showCovidDate = false)
-                "
                 v-model="covidQuestion"
               />
               <span class="ml-4 leading-7">არა</span>
@@ -40,16 +36,13 @@
                 value="have_right_now"
                 rules="required"
                 class="mr-2 w-5 accent-black"
-                @click="
-                  ;(showAntiBodiesQuestion = false), (showTestDate = false), (showCovidDate = false)
-                "
                 v-model="covidQuestion"
               />
               <span class="ml-4 leading-7">ახლა მაქვს</span>
             </div>
           </div>
           <!-- Antibodies -->
-          <div v-if="showAntiBodiesQuestion" class="mt-11">
+          <div v-if="covidQuestion === 'yes'" class="mt-11">
             <label for="name" class="block text-xl font-bold mb-3 leading-7"
               >ანტისხეულების ტესტი გაქვს გაკეთებული?*</label
             >
@@ -61,7 +54,6 @@
                   value="antibodies-yes"
                   rules="required"
                   class="mr-2 w-5 accent-black"
-                  @click=";(showTestDate = true), (showCovidDate = false)"
                   v-model="antibodiesQuestion"
                 />
                 <span class="ml-4 leading-7">კი</span>
@@ -73,7 +65,6 @@
                   value="antibodies-no"
                   rules="required"
                   class="mr-2 w-5 accent-black"
-                  @click=";(showCovidDate = true), (showTestDate = false)"
                   v-model="antibodiesQuestion"
                 />
                 <span class="ml-4 leading-7">არა</span>
@@ -81,47 +72,50 @@
             </div>
           </div>
           <!-- Test / covid date -->
-          <div v-if="showTestDate" class="mt-11">
-            <label for="name" class="block text-xl font-bold mb-2"
-              >თუ გახსოვს, გთხოვ მიუთითე ტესტის მიახლოებითი <br />რიცხვი და ანტისხეულების
-              რაოდენობა*</label
-            >
-            <Field
-              :type="inputType"
-              placeholder="რიცხვი"
-              name="antibodiesTestDate"
-              rules="required"
-              class="py-3 px-4 border border-black w-8/12 bg-[#EAEAEA] placeholder:text-[#232323] font-normal text-xs ml-6 mt-8"
-              @blur="inputType = 'text'"
-              @focus="inputType = 'date'"
-              v-model="antibodiesTestDate"
-            />
 
-            <Field
-              type="text"
-              placeholder="ანტისხეულების რაოდენობა"
-              rules="required"
-              name="antibodiesAmount"
-              class="py-3 px-4 border border-black w-8/12 bg-[#EAEAEA] placeholder:text-[#232323] font-normal text-xs ml-6 mt-4"
-              v-model="antibodiesAmount"
-            />
-          </div>
+          <div v-if="covidQuestion === 'yes'">
+            <div v-if="antibodiesQuestion === 'antibodies-yes'" class="mt-11">
+              <label for="name" class="block text-xl font-bold mb-2"
+                >თუ გახსოვს, გთხოვ მიუთითე ტესტის მიახლოებითი <br />რიცხვი და ანტისხეულების
+                რაოდენობა*</label
+              >
+              <Field
+                :type="inputType"
+                placeholder="რიცხვი"
+                name="antibodiesTestDate"
+                rules="required"
+                class="py-3 px-4 border border-black w-8/12 bg-[#EAEAEA] placeholder:text-[#232323] font-normal text-xs ml-6 mt-8"
+                @blur="inputType = 'text'"
+                @focus="inputType = 'date'"
+                v-model="antibodiesTestDate"
+              />
 
-          <div v-if="showCovidDate" class="mt-11">
-            <label for="name" class="block text-xl font-bold mb-2"
-              >მიუთითე მიახლოებითი პერიოდი(დღე/თვე/წელი) <br />
-              როდის გქონდა Covid-19*</label
-            >
-            <Field
-              :type="inputType"
-              placeholder="დდ/თთ/წწ"
-              rules="required"
-              name="hadCovidAtDate"
-              class="py-3 px-4 border border-black w-8/12 bg-[#EAEAEA] placeholder:text-[#232323] font-normal text-xs ml-6 mt-8"
-              @blur="inputType = 'text'"
-              @focus="inputType = 'date'"
-              v-model="hadCovidAtDate"
-            />
+              <Field
+                type="text"
+                placeholder="ანტისხეულების რაოდენობა"
+                rules="required"
+                name="antibodiesAmount"
+                class="py-3 px-4 border border-black w-8/12 bg-[#EAEAEA] placeholder:text-[#232323] font-normal text-xs ml-6 mt-4"
+                v-model="antibodiesAmount"
+              />
+            </div>
+
+            <div v-else class="mt-11">
+              <label for="name" class="block text-xl font-bold mb-2"
+                >მიუთითე მიახლოებითი პერიოდი(დღე/თვე/წელი) <br />
+                როდის გქონდა Covid-19*</label
+              >
+              <Field
+                :type="inputType"
+                placeholder="დდ/თთ/წწ"
+                rules="required"
+                name="hadCovidAtDate"
+                class="py-3 px-4 border border-black w-8/12 bg-[#EAEAEA] placeholder:text-[#232323] font-normal text-xs ml-6 mt-8"
+                @blur="inputType = 'text'"
+                @focus="inputType = 'date'"
+                v-model="hadCovidAtDate"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -149,9 +143,6 @@ import { useStore } from 'vuex'
 
 const router = useRouter()
 const store = useStore()
-let showAntiBodiesQuestion = ref(false)
-let showTestDate = ref(false)
-let showCovidDate = ref(false)
 let inputType = ref('text')
 
 let covidQuestion = ref('')
@@ -174,16 +165,12 @@ onMounted(() => {
     store.commit('covidInfoStore/getCovidInfoFormValues')
     covidQuestion.value = store.state.covidInfoStore.hadCovid
     if (covidQuestion.value == 'yes') {
-      showAntiBodiesQuestion.value = true
       antibodiesQuestion.value = store.state.covidInfoStore.hadAntibodiesTest
       if (antibodiesQuestion.value == 'antibodies-yes') {
-        showTestDate.value = true
         antibodiesTestDate.value = store.state.covidInfoStore.antibodiesTestDate
         antibodiesAmount.value = store.state.covidInfoStore.antibodiesAmount
-      } else {
-        hadCovidAtDate.value = store.state.covidInfoStore.hadCovidDate
-        showCovidDate.value = true
       }
+      hadCovidAtDate.value = store.state.covidInfoStore.hadCovidDate
     }
   }
 })
@@ -209,3 +196,4 @@ function handleHadCovidForm() {
   })
 }
 </script>
+<!-- @click=";(showTestDate = false), (showCovidDate = false)" -->

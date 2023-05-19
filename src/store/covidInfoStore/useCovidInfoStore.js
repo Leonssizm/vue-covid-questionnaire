@@ -18,7 +18,7 @@ export default {
                 state.antibodiesAmount = payload.antibodiesAmount
                 state.hadCovidDate = ''
             }
-            else if(payload.hadAntibodiesTest == 'antibodies-no') {
+            else if(payload.hadAntibodiesTest === 'antibodies-no') {
                 state.hadCovidDate = payload.hadCovidDate
                 state.antibodiesTestDate = ''
                 state.antibodiesAmount = ''
@@ -41,7 +41,7 @@ export default {
                     })
                 )
             }
-            if(payload.antibodiesQuestion == 'antibodies-yes'){
+            if(payload.antibodiesQuestion === 'antibodies-yes'){
                 localStorage.setItem(
                     'covid-info',
                     JSON.stringify({

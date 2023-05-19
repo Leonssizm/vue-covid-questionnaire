@@ -1,13 +1,13 @@
 import { createApp } from 'vue'
-import App from './App.vue'
-import router from './router'
-import './assets/tailwind.css'
+import App from '@/App.vue'
+import router from '@/router'
+import '@/assets/tailwind.css'
 
 // Vee-validate
-import "./plugins/vee-validate/rules";
-import "./plugins/vee-validate/messages";
+import "@/plugins/vee-validate/rules";
+import "@/plugins/vee-validate/messages";
 
-import store from './store/store.js';
+import store from '@/store/store.js';
 
 
 const app = createApp(App)

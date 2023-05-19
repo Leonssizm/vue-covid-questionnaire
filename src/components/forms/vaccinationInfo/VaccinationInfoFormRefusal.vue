@@ -70,14 +70,19 @@ let popupContent = ref('')
 
 let initialValue = inject('vaccinationRefusalQuestion')
 
-defineProps(['modelValue'])
+defineProps({
+  modelValue: {
+    type: String,
+    required: true
+  }
+})
 defineEmits(['update:modelValue'])
 
 function updatePopupContent(element) {
-  if (element == 'not_planning') {
+  if (element === 'not_planning') {
     popupContent.value =
       '👉 <a class="text-[#1289AE]" href="https://booking.moh.gov.ge/">https://booking.moh.gov.ge/</a>'
-  } else if (element == 'had_covid_and_planning_to_be_vaccinated') {
+  } else if (element === 'had_covid_and_planning_to_be_vaccinated') {
     popupContent.value =
       'ახალი პროტოკოლით კოვიდის გადატანიდან 1 <br/> თვის შემდეგ შეგიძლიათ ვაქცინის გაკეთება. <hr class="mt-3"> 👉 რეგისტრაციის ბმული <br/> <a class="text-[#1289AE]" href="https://booking.moh.gov.ge/">https://booking.moh.gov.ge/</a> '
   }

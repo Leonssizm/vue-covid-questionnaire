@@ -59,11 +59,16 @@ let showPopupModal = ref(false)
 let popupContent = ref('')
 let initialValue = inject('vaccinationStageQuestion')
 
-defineProps(['modelValue'])
+defineProps({
+  modelValue: {
+    type: String,
+    required: true
+  }
+})
 defineEmits(['update:modelValue'])
 
 function updatePopupContent(element) {
-  if (element == 'first_dosage_and_not_registered_yet') {
+  if (element === 'first_dosage_and_not_registered_yet') {
     popupContent.value =
       'რომ არ გადადო, <br/> ბარემ ახლავე დარეგისტრირდი </br> <a class="text-[#1289AE]" href="https://booking.moh.gov.ge/">https://booking.moh.gov.ge/</a>'
   }

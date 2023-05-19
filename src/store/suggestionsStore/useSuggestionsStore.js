@@ -21,14 +21,14 @@ export default {
                 officeWorkdays:payload.officeWorkdays,
             }))
 
-            if(payload.physicalGatherings == '' && payload.enviroment != ''){
+            if(payload.physicalGatherings === '' && payload.enviroment !== ''){
                 localStorage.removeItem('suggestions')
                 localStorage.setItem('suggestions', JSON.stringify({
                     onlineMeetings:payload.onlineMeetings,
                     officeWorkdays:payload.officeWorkdays,
                     enviroment:payload.enviroment
                 }))
-            }else if(payload.enviroment == '' && payload.physicalGatherings != ''){
+            }else if(payload.enviroment === '' && payload.physicalGatherings !== ''){
                 localStorage.removeItem('suggestions')
                 localStorage.setItem('suggestions', JSON.stringify({
                     onlineMeetings:payload.onlineMeetings,
@@ -36,7 +36,7 @@ export default {
                     physicalGatherings:payload.physicalGatherings
                 }))
             }
-            else if(payload.enviroment == '' && payload.physicalGatherings == ''){
+            else if(payload.enviroment === '' && payload.physicalGatherings === ''){
                 localStorage.removeItem('suggestions')
                 localStorage.setItem('suggestions', JSON.stringify({
                     onlineMeetings:payload.onlineMeetings,
