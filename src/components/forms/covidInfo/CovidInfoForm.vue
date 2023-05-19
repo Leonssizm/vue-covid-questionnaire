@@ -100,7 +100,7 @@
               />
             </div>
 
-            <div v-else class="mt-11">
+            <div v-if="antibodiesQuestion === 'antibodies-no'" class="mt-11">
               <label for="name" class="block text-xl font-bold mb-2"
                 >მიუთითე მიახლოებითი პერიოდი(დღე/თვე/წელი) <br />
                 როდის გქონდა Covid-19*</label
